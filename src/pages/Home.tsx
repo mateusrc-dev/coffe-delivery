@@ -5,7 +5,7 @@ import { ButtonTwo } from '../components/ButtonTwo'
 export function Home() {
   return (
     <div>
-      <h1> Olá mundo! </h1>
+      <h1> Home! </h1>
       <Button variant="primary" variantSvg="colorSvgOne">
         <ShoppingCart weight="fill" />
       </Button>
