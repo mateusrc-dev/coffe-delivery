@@ -1,8 +1,8 @@
 import { ShoppingCart } from 'phosphor-react'
-import { Button } from './components/Button'
-import { ButtonTwo } from './components/ButtonTwo'
+import { Button } from '../components/Button'
+import { ButtonTwo } from '../components/ButtonTwo'
 
-export function App() {
+export function Home() {
   return (
     <div>
       <h1> Olá mundo! </h1>
