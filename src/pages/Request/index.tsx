@@ -17,15 +17,22 @@ export function Request() {
       <div className="enterData">
         <h2>Complete seu pedido</h2>
         <div className="containerData">
-          <h3>
-            <MapPinLine size={22} color="#C47F17" /> Endereço de entrega
-          </h3>
-          <p>Informe o endereço onde deseja receber seu pedido</p>
+          <div className="informations">
+            <MapPinLine size={22} color="#C47F17" />
+            <div className="Informations">
+              <h3>Endereço de entrega</h3>
+              <p>Informe o endereço onde deseja receber seu pedido</p>
+            </div>
+          </div>
           <input className="cep" type="text" placeholder="CEP" />
           <input className="street" type="text" placeholder="Rua" />
           <div className="numberAndComplement">
             <input className="number" type="text" placeholder="Número" />
-            <input type="complement" placeholder="Complemento Opcional" />
+            <input
+              className="complement"
+              type="text"
+              placeholder="Complemento                                                   Opcional"
+            />
           </div>
           <div className="address">
             <input className="district" type="text" placeholder="Bairro" />
@@ -34,22 +41,25 @@ export function Request() {
           </div>
         </div>
         <div className="payment">
-          <h3>
-            <CurrencyDollar size={22} color="#8047F8" /> Pagamento
-          </h3>
-          <p>
-            O pagamento é feito na entrega. Escolha a forma que deseja pagar
-          </p>
+          <div className="paymentContainer">
+            <CurrencyDollar size={22} color="#8047F8" />
+            <div className="paymentContainerTwo">
+              <h3>Pagamento</h3>
+              <p>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </p>
+            </div>
+          </div>
           <div className="formOfPayment">
-            <span className="credit">
+            <button className="credit">
               <CreditCard size={16} color="#8047F8" /> CARTÃO DE CRÉDITO
-            </span>
-            <span className="debit">
+            </button>
+            <button className="debit">
               <Bank size={16} color="#8047F8" /> CARTÃO DE DÉBITO
-            </span>
-            <span className="cash">
+            </button>
+            <button className="cash">
               <Money size={16} color="#8047F8" /> DINHEIRO
-            </span>
+            </button>
           </div>
         </div>
       </div>
@@ -78,10 +88,11 @@ export function Request() {
           <span>Entrega</span>
           <span>R$ 3,50</span>
         </div>
-      </div>
-      <div className="fullPrice">
-        <span>Total</span>
-        <span>R$ 33,20</span>
+        <div className="fullPrice">
+          <span>Total</span>
+          <span>R$ 33,20</span>
+        </div>
+        <button className="confirmRequest">CONFIRMAR PEDIDO</button>
       </div>
     </RequestContainer>
   )
