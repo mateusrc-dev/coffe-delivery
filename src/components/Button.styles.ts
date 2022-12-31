@@ -26,6 +26,7 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   ${(props) =>
     css`
       background-color: ${buttonVariants[props.variant]};
@@ -35,6 +36,14 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     ${(props) =>
       css`
         color: ${buttonVariants[props.variantSvg]};
+      `}
+  }
+  &:hover {
+    ${(props) =>
+      css`
+        background-color: ${buttonVariants[props.variant] === buttonVariants.secondary
+          ? null
+          : props.theme["purple-200"]};
       `}
   }
 `;

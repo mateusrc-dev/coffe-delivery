@@ -1,5 +1,6 @@
 import { ShoppingCart } from "phosphor-react";
 import { Button } from "./components/Button";
+import { ButtonTwo } from "./components/ButtonTwo";
 
 export function App() {
   return (
@@ -11,6 +12,7 @@ export function App() {
       <Button variant="secondary" variantSvg="colorSvgTwo">
         <ShoppingCart weight="fill" />
       </Button>
+      <ButtonTwo>LABEL</ButtonTwo>
     </div>
   );
 }
