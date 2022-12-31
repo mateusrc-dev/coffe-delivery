@@ -16,6 +16,34 @@ export function Home() {
           description="O tradicional café feito com água quente e grãos moídos"
           price="9,90"
         />
+        <Coffee
+          tags={['TRADICIONAL']}
+          img={CoffeeOne}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price="9,90"
+        />
+        <Coffee
+          tags={['TRADICIONAL']}
+          img={CoffeeOne}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price="9,90"
+        />
+        <Coffee
+          tags={['TRADICIONAL']}
+          img={CoffeeOne}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price="9,90"
+        />
+        <Coffee
+          tags={['TRADICIONAL']}
+          img={CoffeeOne}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price="9,90"
+        />
       </div>
     </Container>
   )

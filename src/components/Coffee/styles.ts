@@ -86,6 +86,8 @@ export const Container = styled.div`
       font-size: 1rem;
       line-height: 1.3;
       color: ${(props) => props.theme['brown-300']};
+      margin-left: 1.4375rem;
+      margin-right: 0.5rem;
     }
   }
 `
