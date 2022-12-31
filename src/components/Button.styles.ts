@@ -1,22 +1,22 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "colorSvgOne"
-  | "colorSvgTwo";
+  | 'primary'
+  | 'secondary'
+  | 'colorSvgOne'
+  | 'colorSvgTwo'
 
 interface ButtonContainerProps {
-  variant: ButtonVariant;
-  variantSvg: ButtonVariant;
+  variant: ButtonVariant
+  variantSvg: ButtonVariant
 }
 
 const buttonVariants = {
-  primary: "#4B2995",
-  secondary: "#F1E9C9",
-  colorSvgOne: "#F3F2F2",
-  colorSvgTwo: "#C47F17",
-};
+  primary: '#4B2995',
+  secondary: '#F1E9C9',
+  colorSvgOne: '#F3F2F2',
+  colorSvgTwo: '#C47F17',
+}
 
 export const ButtonContainer = styled.button<ButtonContainerProps>`
   width: 2.375rem;
@@ -41,9 +41,10 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
   &:hover {
     ${(props) =>
       css`
-        background-color: ${buttonVariants[props.variant] === buttonVariants.secondary
+        background-color: ${buttonVariants[props.variant] ===
+        buttonVariants.secondary
           ? null
-          : props.theme["purple-200"]};
+          : props.theme['purple-200']};
       `}
   }
-`;
+`
