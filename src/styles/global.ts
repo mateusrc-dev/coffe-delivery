@@ -15,6 +15,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: ${(props) => props.theme['gray-100']};
     color: ${(props) => props.theme['brown-100']};
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
   }
 
   body, input, button {

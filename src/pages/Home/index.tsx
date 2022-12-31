@@ -1,46 +1,22 @@
-import { HomeContainer, HomeHeader } from './styles'
-import Imagem from '../../assets/Imagem.svg'
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { Coffee } from '../../components/Coffee'
+import { HeaderContainer } from '../../components/HeaderContainer'
+import { Container } from './styles'
+import CoffeeOne from '../../assets/Coffee.png'
 
 export function Home() {
   return (
-    <HomeContainer>
-      <HomeHeader>
-        <div className="content">
-          <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-          <p>
-            Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
-            hora
-          </p>
-          <div className="wrapper">
-            <div className="item">
-              <div className="icon">
-                <ShoppingCart weight="fill" size={16} color="#ffffff" />
-              </div>
-              <p>Compra simples e segura</p>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <Package weight="fill" size={16} color="#ffffff" />
-              </div>
-              <p>Embalagem mantém o café intacto</p>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <Timer weight="fill" size={16} color="#ffffff" />
-              </div>
-              <p>Entrega rápida e rastreada</p>
-            </div>
-            <div className="item">
-              <div className="icon">
-                <Coffee weight="fill" size={16} color="#ffffff" />
-              </div>
-              <p>O café chega fresquinho até você</p>
-            </div>
-          </div>
-        </div>
-        <img src={Imagem} alt="imagem de um copo com o nome coffe delivery" />
-      </HomeHeader>
-    </HomeContainer>
+    <Container>
+      <HeaderContainer />
+      <h2>Nossos cafés</h2>
+      <div className="cofes">
+        <Coffee
+          tags={['TRADICIONAL']}
+          img={CoffeeOne}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price="9,90"
+        />
+      </div>
+    </Container>
   )
 }

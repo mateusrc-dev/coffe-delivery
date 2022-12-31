@@ -5,6 +5,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 6.5rem;
+  padding: 0 10rem;
   .logo {
     width: 5.3125rem;
     height: 2.5rem;

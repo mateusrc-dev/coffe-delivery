@@ -1,24 +1,15 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.div``
-export const HomeHeader = styled.header`
-  .wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-  .item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: ${(props) => props.theme['purple-200']};
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-    }
+export const Container = styled.div`
+  height: 100vh;
+  overflow-y: scroll;
+  h2 {
+    padding: 0 10rem;
+    margin-top: 5.75rem;
+    font-family: 'Baloo 2';
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 1.3;
+    color: ${(props) => props.theme['brown-200']};
   }
 `
