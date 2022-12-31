@@ -22,13 +22,19 @@ export function Coffee({ tags, title, description, price, img }: CoffeeProps) {
         ))}
       </div>
       <h2>{title}</h2>
-      <p>{description}</p>
+      <p className="description">{description}</p>
       <div className="finishedBuy">
-        <span>R$ {price}</span>
-        <span>
-          <Minus />
+        <span className="price">
+          R$ <span className="Price">{price}</span>
+        </span>
+        <span className="amountItems">
+          <button>
+            <Minus color="#8047F8" weight="fill" />
+          </button>
           1
-          <Plus />
+          <button>
+            <Plus color="#8047F8" weight="fill" />
+          </button>
         </span>
         <Button variant="primary" variantSvg="colorSvgOne">
           <ShoppingCart weight="fill" />

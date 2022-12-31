@@ -7,7 +7,7 @@ export function Home() {
   return (
     <Container>
       <HeaderContainer />
-      <h2>Nossos cafés</h2>
+      <h1 className="titleHome">Nossos cafés</h1>
       <div className="cofes">
         <Coffee
           tags={['TRADICIONAL']}
