@@ -8,9 +8,12 @@ import {
   MapPinLine,
   Money,
   Trash,
+  MapPin,
+  Timer,
 } from 'phosphor-react'
 import { RequestContainer } from './styles'
 import { useState } from 'react'
+import Image from '../../assets/Illustration.svg'
 
 export function Request() {
   const [click, setClick] = useState(true)
@@ -141,7 +144,53 @@ export function Request() {
           </div>
         </main>
       ) : (
-        <h1>Hello world!</h1>
+        <section className="secondPage">
+          <div className="columnOne">
+            <h1 className="titleRequestPage">Uhu, pedido confirmado</h1>
+            <p className="titleRequestPageTwo">
+              Agora é só aguardar que logo o café chegará até você
+            </p>
+            <div className="requestFinished">
+              <div className="inner">
+                <div className="itemRequestOne">
+                  <div className="svg">
+                    <MapPin weight="fill" size={16} color="#fafafa" />
+                  </div>
+                  <div className="details">
+                    <p>
+                      Entrega em{' '}
+                      <strong>Rua João Daniel Martinelli, 102</strong>
+                    </p>
+                    <p>Farrapos - Porto Alegre, RS</p>
+                  </div>
+                </div>
+                <div className="itemRequestTwo">
+                  <div className="svg">
+                    <Timer weight="fill" size={16} color="#fafafa" />
+                  </div>
+                  <div className="details">
+                    <p>Previsão de entrega</p>
+                    <p>
+                      <strong>20 min - 30 min</strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="itemRequestThree">
+                  <div className="svg">
+                    <CurrencyDollar weight="fill" size={16} color="#fafafa" />
+                  </div>
+                  <div className="details">
+                    <p>Pagamento na entrega</p>
+                    <p>
+                      <strong>Cartão de Crédito</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <img src={Image} alt="imagem de um motoqueiro fazendo a entrega" />
+        </section>
       )}
     </RequestContainer>
   )

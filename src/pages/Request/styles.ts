@@ -323,4 +323,103 @@ export const RequestContainer = styled.div`
       }
     }
   }
+  .secondPage {
+    padding: 0 10rem;
+    display: flex;
+    gap: 6.375rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 5rem;
+    .columnOne .titleRequestPage {
+      font-family: 'Baloo 2';
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1.3;
+      color: ${(props) => props.theme['yellow-300']};
+      margin-bottom: 0.25rem;
+    }
+    .columnOne .titleRequestPageTwo {
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      color: ${(props) => props.theme['brown-200']};
+      margin-bottom: 2.5rem;
+    }
+    .requestFinished {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 33rem;
+      height: 17rem;
+      border-radius: 6px 36px 6px 36px;
+      background: linear-gradient(to right, #dbac2c, #8047f8);
+      .inner {
+        width: 32.875rem;
+        height: 16.875rem;
+        border-radius: 6px 36px 6px 36px;
+        background: ${(props) => props.theme['gray-100']};
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .itemRequestOne {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        .svg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          border-radius: 50%;
+          background: ${(props) => props.theme['purple-200']};
+        }
+        .details p {
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 1.3;
+          color: ${(props) => props.theme['brown-100']};
+        }
+      }
+      .itemRequestTwo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        .svg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          border-radius: 50%;
+          background: ${(props) => props.theme['yellow-200']};
+        }
+        .details p {
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 1.3;
+          color: ${(props) => props.theme['brown-100']};
+        }
+      }
+      .itemRequestThree {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        .svg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          border-radius: 50%;
+          background: ${(props) => props.theme['yellow-300']};
+        }
+        .details p {
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 1.3;
+          color: ${(props) => props.theme['brown-100']};
+        }
+      }
+    }
+  }
 `
