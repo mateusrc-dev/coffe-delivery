@@ -22,10 +22,20 @@ export function Header() {
           <p>Teresina, PI</p>
         </div>
         <NavLink className="link" to="/request" title="ver pedidos">
-          <div className="amountRequest"></div>
-          <Button variant="secondary" variantSvg="colorSvgTwo">
-            <ShoppingCart weight="fill" />
-          </Button>
+          {request.length === 0 ? (
+            <Button variant="secondary" variantSvg="colorSvgTwo">
+              <ShoppingCart weight="fill" />
+            </Button>
+          ) : (
+            <div className="button">
+              <div className="amountRequest">
+                <p>{request.length}</p>
+              </div>
+              <Button variant="secondary" variantSvg="colorSvgTwo">
+                <ShoppingCart weight="fill" />
+              </Button>
+            </div>
+          )}
         </NavLink>
       </div>
     </HeaderContainer>

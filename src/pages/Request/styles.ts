@@ -180,6 +180,14 @@ export const RequestContainer = styled.div`
     width: 28rem;
     background: ${(props) => props.theme['gray-300']};
     border-radius: 6px 44px 6px 44px;
+    .requestNull {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: ${(props) => props.theme['brown-100']};
+      font-style: italic;
+      font-weight: bold;
+    }
     .coffee {
       display: flex;
       align-items: flex-start;
@@ -324,8 +332,12 @@ export const RequestContainer = styled.div`
       line-height: 1.6;
       color: ${(props) => props.theme.white};
       cursor: pointer;
-      &:hover {
+      &:not(:disabled):hover {
         background: ${(props) => props.theme['yellow-300']};
+      }
+      &:disabled {
+        cursor: not-allowed;
+        filter: brightness(0.8);
       }
     }
   }

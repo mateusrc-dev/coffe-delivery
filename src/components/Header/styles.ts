@@ -49,4 +49,28 @@ export const HeaderContainer = styled.header`
     font-weight: 400;
     font-size: 0.875rem;
   }
+
+  .button {
+    position: relative;
+  }
+
+  .amountRequest {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    right: -10px;
+    background-color: ${(props) => props.theme['yellow-300']};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.3;
+    color: ${(props) => props.theme.white};
+    p {
+      margin-top: 2px;
+    }
+  }
 `

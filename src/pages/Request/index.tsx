@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import CoffeeOne from '../../assets/Coffee.png'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
@@ -14,9 +13,11 @@ import {
   Trash,
   MapPin,
   Timer,
+  Warning,
 } from 'phosphor-react'
 import { RequestContainer } from './styles'
 import Image from '../../assets/Illustration.svg'
+import { RequestContext } from '../../contexts/contextRequest'
 
 const newRequestFormValidationSchema = zod.object({
   cep: zod.string().min(1, 'Informe seu CPF!'),
@@ -46,8 +47,25 @@ export function Request() {
   const [click, setClick] = useState(true)
   const [address, setAddress] = useState<Address>({})
   const [payment, setPayment] = useState('')
+  const { request } = useContext(RequestContext)
+  const [priceFull, setPriceFull] = useState(0)
+  const [fullPrice, setFullPrice] = useState(0)
 
   console.log(address)
+
+  useEffect(() => {
+    function handleFullPrice() {
+      let num = 0
+      for (let i = 0; request.length > i; i++) {
+        num =
+          num +
+          Number(request[i].price.replace(',', '.')) * Number(request[i].amount)
+      }
+      return num
+    }
+    setPriceFull(handleFullPrice())
+    setFullPrice(handleFullPrice() + 3.5)
+  }, [request])
 
   const { register, reset, handleSubmit, watch } = useForm<NewRequestFormData>({
     resolver: zodResolver(newRequestFormValidationSchema),
@@ -197,61 +215,65 @@ export function Request() {
           <div className="selectedCoffees">
             <h2>Cafés selecionados</h2>
             <div className="ContainerCoffees">
-              <div className="coffee">
-                <img src={CoffeeOne} alt="imagem do café" />
-                <div className="content">
-                  <p>Expresso Tradicional</p>
-                  <div className="amountAndButton">
-                    <span className="amountItem">
-                      <button>
-                        <Minus color="#8047F8" weight="fill" />
-                      </button>
-                      1
-                      <button>
-                        <Plus color="#8047F8" weight="fill" />
-                      </button>
-                    </span>
-                    <button className="button">
-                      <Trash size={16} color="#8047F8" /> REMOVER
-                    </button>
-                  </div>
+              {request.length === 0 ? (
+                <div className="requestNull">
+                  <Warning size={36} weight="fill" color="#DBAC2C" /> Você ainda
+                  não selecionou nenhum café!
                 </div>
-                <span className="price">R$ 9,90</span>
-              </div>
-              <div className="coffee">
-                <img src={CoffeeOne} alt="imagem do café" />
-                <div className="content">
-                  <p>Expresso Tradicional</p>
-                  <div className="amountAndButton">
-                    <span className="amountItem">
-                      <button>
-                        <Minus color="#8047F8" weight="fill" />
-                      </button>
-                      1
-                      <button>
-                        <Plus color="#8047F8" weight="fill" />
-                      </button>
-                    </span>
-                    <button className="button">
-                      <Trash size={16} color="#8047F8" /> REMOVER
-                    </button>
-                  </div>
+              ) : (
+                <div>
+                  {request.map((item) => (
+                    <div key={String(item.img)} className="coffee">
+                      <img src={item.img} alt="imagem do café" />
+                      <div className="content">
+                        <p>{item.title}</p>
+                        <div className="amountAndButton">
+                          <span className="amountItem">
+                            <button type="button">
+                              <Minus color="#8047F8" weight="fill" />
+                            </button>
+                            {item.amount}
+                            <button type="button">
+                              <Plus color="#8047F8" weight="fill" />
+                            </button>
+                          </span>
+                          <button className="button">
+                            <Trash size={16} color="#8047F8" /> REMOVER
+                          </button>
+                        </div>
+                      </div>
+                      <span className="price">R$ {item.price}</span>
+                    </div>
+                  ))}
                 </div>
-                <span className="price">R$ 9,90</span>
-              </div>
+              )}
               <div className="fullItems">
                 <span>Total de itens</span>
-                <span>R$ 29,70</span>
+                <span>R$ {String(priceFull.toFixed(2)).replace('.', ',')}</span>
               </div>
               <div className="delivery">
                 <span>Entrega</span>
-                <span>R$ 3,50</span>
+                {request.length === 0 ? (
+                  <span>R$ 0,00</span>
+                ) : (
+                  <span>R$ 3,50</span>
+                )}
               </div>
               <div className="fullPrice">
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                {request.length === 0 ? (
+                  <span>R$ 0,00</span>
+                ) : (
+                  <span>
+                    R$ {String(fullPrice.toFixed(2)).replace('.', ',')}
+                  </span>
+                )}
               </div>
-              <button className="confirmRequest" type="submit">
+              <button
+                className="confirmRequest"
+                type="submit"
+                disabled={request.length === 0}
+              >
                 CONFIRMAR PEDIDO
               </button>
             </div>
