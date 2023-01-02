@@ -11,6 +11,7 @@ interface RequestContextType {
   request: Request[]
   handleAmount: (amount: number, img: string) => void
   handleDelete: (img: string) => void
+  handleDeleteRequests: () => void
   handleNewRequest: (
     title: string,
     price: string,
@@ -49,6 +50,10 @@ export function RequestContextProvider({
     setRequest(requests)
   }
 
+  function handleDeleteRequests() {
+    setRequest([])
+  }
+
   function handleNewRequest(
     title: string,
     price: string,
@@ -65,7 +70,13 @@ export function RequestContextProvider({
   }
   return (
     <RequestContext.Provider
-      value={{ handleNewRequest, request, handleAmount, handleDelete }}
+      value={{
+        handleNewRequest,
+        request,
+        handleAmount,
+        handleDelete,
+        handleDeleteRequests,
+      }}
     >
       {children}
     </RequestContext.Provider>

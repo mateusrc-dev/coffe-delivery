@@ -49,7 +49,8 @@ export function Request() {
   const [payment, setPayment] = useState('')
   const [priceFull, setPriceFull] = useState(0)
   const [fullPrice, setFullPrice] = useState(0)
-  const { request, handleAmount, handleDelete } = useContext(RequestContext)
+  const { request, handleAmount, handleDelete, handleDeleteRequests } =
+    useContext(RequestContext)
 
   console.log(address)
 
@@ -115,6 +116,7 @@ export function Request() {
     setAddress(newPurchase)
     reset()
     setClick(false)
+    handleDeleteRequests()
   }
 
   function handlePaymentCredit() {
@@ -326,9 +328,13 @@ export function Request() {
                   <div className="details">
                     <p>
                       Entrega em{' '}
-                      <strong>Rua João Daniel Martinelli, 102</strong>
+                      <strong>
+                        {address.street}, {address.number}
+                      </strong>
                     </p>
-                    <p>Farrapos - Porto Alegre, RS</p>
+                    <p>
+                      {address.district} - {address.city}, {address.state}
+                    </p>
                   </div>
                 </div>
                 <div className="itemRequestTwo">
@@ -349,7 +355,11 @@ export function Request() {
                   <div className="details">
                     <p>Pagamento na entrega</p>
                     <p>
-                      <strong>Cartão de Crédito</strong>
+                      <strong>
+                        {payment === 'credit' ? 'Cartão de Crédito' : null}
+                        {payment === 'debit' ? 'Cartão de Débito' : null}
+                        {payment === 'cash' ? 'Dinheiro' : null}
+                      </strong>
                     </p>
                   </div>
                 </div>
