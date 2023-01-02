@@ -5,15 +5,21 @@ interface ButtonProps {
   variant?: ButtonVariant
   variantSvg?: ButtonVariant
   children: ReactNode
+  onClick: () => void
 }
 
 export function Button({
   variant = 'primary',
   variantSvg = 'colorSvgOne',
   children,
+  onClick,
 }: ButtonProps) {
   return (
-    <ButtonContainer variant={variant} variantSvg={variantSvg}>
+    <ButtonContainer
+      onClick={onClick}
+      variant={variant}
+      variantSvg={variantSvg}
+    >
       {children}
     </ButtonContainer>
   )

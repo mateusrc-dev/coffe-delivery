@@ -74,6 +74,9 @@ export const Container = styled.div`
         background: none;
         border: none;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       display: flex;
       justify-content: center;

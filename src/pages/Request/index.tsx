@@ -1,4 +1,8 @@
+import { useState } from 'react'
 import CoffeeOne from '../../assets/Coffee.png'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import {
   Minus,
   Plus,
@@ -12,24 +16,72 @@ import {
   Timer,
 } from 'phosphor-react'
 import { RequestContainer } from './styles'
-import { useState } from 'react'
 import Image from '../../assets/Illustration.svg'
+
+const newRequestFormValidationSchema = zod.object({
+  cep: zod.string().min(1, 'Informe seu CPF!'),
+  street: zod.string().min(1, 'Escreva o nome da sua rua!'),
+  number: zod.string().min(1, 'Insira o número da sua casa!'),
+  complement: zod.string().min(0),
+  district: zod.string().min(1, 'Insira o nome do seu bairro!'),
+  city: zod.string().min(1, 'Insira o nome da sua cidade!'),
+  state: zod.string().min(1, 'Insira o nome do seu estado!'),
+})
+
+type NewRequestFormData = zod.infer<typeof newRequestFormValidationSchema>
+
+interface Address {
+  cep?: string // aqui vai ficar os dados do endereço do cliente
+  city?: string
+  complement?: string
+  district?: string
+  number?: string
+  state?: string
+  street?: string
+  finished?: string // aqui vai ficar a informação se a compra finalizou ou não
+}
 
 export function Request() {
   const [click, setClick] = useState(true)
+  const [address, setAddress] = useState<Address>({})
 
-  function handleClick() {
-    if (click === true) {
-      setClick(false)
-    } else {
-      setClick(true)
+  console.log(address)
+
+  const { register, reset, handleSubmit, watch } = useForm<NewRequestFormData>({
+    resolver: zodResolver(newRequestFormValidationSchema),
+    defaultValues: {
+      cep: '',
+      city: '',
+      complement: '',
+      district: '',
+      number: '',
+      state: '',
+      street: '',
+    },
+  })
+
+  function handleCreateNewCycle(data: NewRequestFormData) {
+    const newPurchase: Address = {
+      cep: data.cep,
+      city: data.city,
+      complement: data.complement,
+      district: data.district,
+      number: data.number,
+      state: data.state,
+      street: data.street,
     }
+    setAddress(newPurchase)
+    reset()
+    setClick(false)
   }
+
+  const cep = watch('cep')
+  console.log(cep)
 
   return (
     <RequestContainer>
       {click ? (
-        <main>
+        <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
           <div className="enterData">
             <h2>Complete seu pedido</h2>
             <div className="containerData">
@@ -40,20 +92,51 @@ export function Request() {
                   <p>Informe o endereço onde deseja receber seu pedido</p>
                 </div>
               </div>
-              <input className="cep" type="text" placeholder="CEP" />
-              <input className="street" type="text" placeholder="Rua" />
+              <input
+                className="cep"
+                type="text"
+                placeholder="CEP"
+                {...register('cep')}
+              />
+              <input
+                className="street"
+                type="text"
+                placeholder="Rua"
+                {...register('street')}
+              />
               <div className="numberAndComplement">
-                <input className="number" type="text" placeholder="Número" />
+                <input
+                  className="number"
+                  type="text"
+                  placeholder="Número"
+                  {...register('number')}
+                />
                 <input
                   className="complement"
                   type="text"
                   placeholder="Complemento                                                   Opcional"
+                  {...register('complement')}
                 />
               </div>
               <div className="address">
-                <input className="district" type="text" placeholder="Bairro" />
-                <input className="city" type="text" placeholder="Cidade" />
-                <input className="state" type="text" placeholder="UF" />
+                <input
+                  className="district"
+                  type="text"
+                  placeholder="Bairro"
+                  {...register('district')}
+                />
+                <input
+                  className="city"
+                  type="text"
+                  placeholder="Cidade"
+                  {...register('city')}
+                />
+                <input
+                  className="state"
+                  type="text"
+                  placeholder="UF"
+                  {...register('state')}
+                />
               </div>
             </div>
             <div className="payment">
@@ -68,13 +151,13 @@ export function Request() {
                 </div>
               </div>
               <div className="formOfPayment">
-                <button className="credit">
+                <button className="credit" type="button">
                   <CreditCard size={16} color="#8047F8" /> CARTÃO DE CRÉDITO
                 </button>
-                <button className="debit">
+                <button className="debit" type="button">
                   <Bank size={16} color="#8047F8" /> CARTÃO DE DÉBITO
                 </button>
-                <button className="cash">
+                <button className="cash" type="button">
                   <Money size={16} color="#8047F8" /> DINHEIRO
                 </button>
               </div>
@@ -137,12 +220,12 @@ export function Request() {
                 <span>Total</span>
                 <span>R$ 33,20</span>
               </div>
-              <button onClick={handleClick} className="confirmRequest">
+              <button className="confirmRequest" type="submit">
                 CONFIRMAR PEDIDO
               </button>
             </div>
           </div>
-        </main>
+        </form>
       ) : (
         <section className="secondPage">
           <div className="columnOne">

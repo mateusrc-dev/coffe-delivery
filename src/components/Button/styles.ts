@@ -9,6 +9,7 @@ export type ButtonVariant =
 interface ButtonContainerProps {
   variant: ButtonVariant
   variantSvg: ButtonVariant
+  onClick: () => void
 }
 
 const buttonVariants = {

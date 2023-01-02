@@ -21,7 +21,7 @@ export const RequestContainer = styled.div`
     background-clip: padding-box;
     border: 3px solid transparent;
   }
-  main {
+  form {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -210,6 +210,9 @@ export const RequestContainer = styled.div`
           button {
             background: none;
             border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
           }
           display: flex;
