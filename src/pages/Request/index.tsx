@@ -39,11 +39,13 @@ interface Address {
   state?: string
   street?: string
   finished?: string // aqui vai ficar a informação se a compra finalizou ou não
+  payment?: string
 }
 
 export function Request() {
   const [click, setClick] = useState(true)
   const [address, setAddress] = useState<Address>({})
+  const [payment, setPayment] = useState('')
 
   console.log(address)
 
@@ -61,6 +63,10 @@ export function Request() {
   })
 
   function handleCreateNewCycle(data: NewRequestFormData) {
+    if (payment.length === 0) {
+      alert('Escolha uma forma de pagamento!')
+      return
+    }
     const newPurchase: Address = {
       cep: data.cep,
       city: data.city,
@@ -69,10 +75,23 @@ export function Request() {
       number: data.number,
       state: data.state,
       street: data.street,
+      payment,
     }
     setAddress(newPurchase)
     reset()
     setClick(false)
+  }
+
+  function handlePaymentCredit() {
+    setPayment('credit')
+  }
+
+  function handlePaymentDebit() {
+    setPayment('debit')
+  }
+
+  function handlePaymentCash() {
+    setPayment('cash')
   }
 
   const cep = watch('cep')
@@ -151,13 +170,25 @@ export function Request() {
                 </div>
               </div>
               <div className="formOfPayment">
-                <button className="credit" type="button">
+                <button
+                  className={payment === 'credit' ? 'active' : 'none'}
+                  type="button"
+                  onClick={handlePaymentCredit}
+                >
                   <CreditCard size={16} color="#8047F8" /> CARTÃO DE CRÉDITO
                 </button>
-                <button className="debit" type="button">
+                <button
+                  className={payment === 'debit' ? 'active' : 'none'}
+                  type="button"
+                  onClick={handlePaymentDebit}
+                >
                   <Bank size={16} color="#8047F8" /> CARTÃO DE DÉBITO
                 </button>
-                <button className="cash" type="button">
+                <button
+                  className={payment === 'cash' ? 'active' : 'none'}
+                  type="button"
+                  onClick={handlePaymentCash}
+                >
                   <Money size={16} color="#8047F8" /> DINHEIRO
                 </button>
               </div>

@@ -166,6 +166,9 @@ export const RequestContainer = styled.div`
         &:hover {
           background: ${(props) => props.theme['gray-600']};
         }
+        &.active {
+          box-shadow: 0 0 0 1px ${(props) => props.theme['purple-200']};
+        }
       }
     }
   }
