@@ -5,7 +5,7 @@ interface ButtonProps {
   variant?: ButtonVariant
   variantSvg?: ButtonVariant
   children: ReactNode
-  onClick: () => void
+  onClick?: any
 }
 
 export function Button({

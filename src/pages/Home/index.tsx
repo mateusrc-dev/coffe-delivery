@@ -1,7 +1,7 @@
 import { Coffee } from '../../components/Coffee'
 import { HeaderContainer } from '../../components/HeaderContainer'
 import { Container } from './styles'
-import { useState } from 'react'
+import { useContext } from 'react'
 import CoffeeOne from '../../assets/Coffee.png'
 import Coffee2 from '../../assets/Coffee2.png'
 import Coffee3 from '../../assets/Coffee3.png'
@@ -16,33 +16,10 @@ import Coffee11 from '../../assets/Coffee11.png'
 import Coffee12 from '../../assets/Coffee12.png'
 import Coffee13 from '../../assets/Coffee13.png'
 import Coffee14 from '../../assets/Coffee14.png'
-
-interface Coffees {
-  title: string
-  price: string
-  img: string
-  amount: number
-}
+import { RequestContext } from '../../contexts/contextRequest'
 
 export function Home() {
-  const [request, setRequest] = useState<Coffees[]>([])
-
-  console.log(request)
-
-  function handleNewRequest(
-    title: string,
-    price: string,
-    img: string,
-    amount: number,
-  ) {
-    const newCoffee: Coffees = {
-      title,
-      price,
-      img,
-      amount,
-    }
-    setRequest((state) => [...state, newCoffee])
-  }
+  const { handleNewRequest } = useContext(RequestContext)
 
   return (
     <Container>
