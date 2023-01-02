@@ -39,7 +39,7 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
         color: ${buttonVariants[props.variantSvg]};
       `}
   }
-  &:hover {
+  &:not(:disabled):hover {
     ${(props) =>
       css`
         background-color: ${buttonVariants[props.variant] ===
@@ -47,5 +47,9 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
           ? null
           : props.theme['purple-200']};
       `}
+  }
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.8);
   }
 `

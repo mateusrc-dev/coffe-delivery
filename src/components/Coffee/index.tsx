@@ -1,7 +1,8 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { Button } from '../Button'
 import { Container } from './styles'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { RequestContext } from '../../contexts/contextRequest'
 
 interface CoffeeProps {
   tags: string[]
@@ -26,6 +27,7 @@ export function Coffee({
   handleNewRequest,
 }: CoffeeProps) {
   const [amount, setAmount] = useState<number>(1)
+  const { request, handleAmount } = useContext(RequestContext)
 
   function handleClick() {
     handleNewRequest(title, price, img, amount)
@@ -33,6 +35,7 @@ export function Coffee({
 
   function handleAmountAdd() {
     setAmount((state) => state + 1)
+    handleAmount(amount + 1, img)
   }
 
   function handleAmountSub() {
@@ -40,8 +43,17 @@ export function Coffee({
       return amount
     } else {
       setAmount((state) => state - 1)
+      handleAmount(amount - 1, img)
     }
   }
+
+  const requestCurrent: any = request.find((item) => item.img === img)
+
+  useEffect(() => {
+    if (requestCurrent) {
+      setAmount(requestCurrent.amount)
+    }
+  }, [amount, requestCurrent])
 
   return (
     <Container>
@@ -63,7 +75,7 @@ export function Coffee({
           <button onClick={handleAmountSub}>
             <Minus color="#8047F8" weight="fill" />
           </button>
-          {amount}
+          {requestCurrent ? requestCurrent?.amount : amount}
           <button onClick={handleAmountAdd}>
             <Plus color="#8047F8" weight="fill" />
           </button>
@@ -72,6 +84,7 @@ export function Coffee({
           onClick={handleClick}
           variant="primary"
           variantSvg="colorSvgOne"
+          disabled={!!requestCurrent}
         >
           <ShoppingCart weight="fill" />
         </Button>

@@ -9,8 +9,6 @@ import { RequestContext } from '../../contexts/contextRequest'
 export function Header() {
   const { request } = useContext(RequestContext)
 
-  console.log(request)
-
   return (
     <HeaderContainer>
       <NavLink className="linkLogo" to="/" title="ir para a página inicial">
