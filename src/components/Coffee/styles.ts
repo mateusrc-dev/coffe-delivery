@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +9,27 @@ export const Container = styled.div`
   height: 19.375rem;
   background: ${(props) => props.theme['gray-300']};
   border-radius: 6px 36px 6px 36px;
+
+  .none {
+    display: none;
+  }
+  .trash {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background: ${(props) => props.theme['purple-300']};
+    top: -0.5rem;
+    right: -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background: ${(props) => props.theme['purple-200']};
+    }
+  }
 
   img {
     margin-top: -1.25rem;

@@ -47,11 +47,28 @@ export function Request() {
   const [click, setClick] = useState(true)
   const [address, setAddress] = useState<Address>({})
   const [payment, setPayment] = useState('')
-  const { request } = useContext(RequestContext)
   const [priceFull, setPriceFull] = useState(0)
   const [fullPrice, setFullPrice] = useState(0)
+  const { request, handleAmount, handleDelete } = useContext(RequestContext)
 
   console.log(address)
+
+  function handleAmountAdd(img: string, amount: number) {
+    handleAmount(amount + 1, img)
+  }
+
+  function handleAmountSub(img: string, amount: number) {
+    console.log('chegamos aqui')
+    if (amount === 1) {
+      return amount
+    } else {
+      handleAmount(amount - 1, img)
+    }
+  }
+
+  function handleRequestDelete(img: string) {
+    handleDelete(img)
+  }
 
   useEffect(() => {
     function handleFullPrice() {
@@ -229,15 +246,29 @@ export function Request() {
                         <p>{item.title}</p>
                         <div className="amountAndButton">
                           <span className="amountItem">
-                            <button type="button">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleAmountSub(item.img, item.amount)
+                              }
+                            >
                               <Minus color="#8047F8" weight="fill" />
                             </button>
                             {item.amount}
-                            <button type="button">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleAmountAdd(item.img, item.amount)
+                              }
+                            >
                               <Plus color="#8047F8" weight="fill" />
                             </button>
                           </span>
-                          <button className="button">
+                          <button
+                            className="button"
+                            type="button"
+                            onClick={() => handleRequestDelete(item.img)}
+                          >
                             <Trash size={16} color="#8047F8" /> REMOVER
                           </button>
                         </div>

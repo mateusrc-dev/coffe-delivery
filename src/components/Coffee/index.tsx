@@ -1,4 +1,4 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { Minus, Plus, ShoppingCart, Trash } from 'phosphor-react'
 import { Button } from '../Button'
 import { Container } from './styles'
 import { useContext, useEffect, useState } from 'react'
@@ -27,7 +27,7 @@ export function Coffee({
   handleNewRequest,
 }: CoffeeProps) {
   const [amount, setAmount] = useState<number>(1)
-  const { request, handleAmount } = useContext(RequestContext)
+  const { request, handleAmount, handleDelete } = useContext(RequestContext)
 
   function handleClick() {
     handleNewRequest(title, price, img, amount)
@@ -47,7 +47,7 @@ export function Coffee({
     }
   }
 
-  const requestCurrent: any = request.find((item) => item.img === img)
+  const requestCurrent = request.find((item) => item.img === img)
 
   useEffect(() => {
     if (requestCurrent) {
@@ -55,8 +55,19 @@ export function Coffee({
     }
   }, [amount, requestCurrent])
 
+  function handleRequestDelete() {
+    handleDelete(img)
+  }
+
   return (
     <Container>
+      <button
+        className={requestCurrent ? 'trash' : 'none'}
+        title="excluir do carrinho"
+        onClick={handleRequestDelete}
+      >
+        <Trash color="#ffffff" size={16} weight="bold" />
+      </button>
       <img className="img" src={img} alt="imagem do café" />
       <div className="tags">
         {tags.map((tag) => (
