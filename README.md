@@ -4,7 +4,7 @@ In this project, technologies such as ReactJs, Context Api, useState, useReduce,
 
 # Some techniques that were used in this project are:
 
-### State immutability
-### Lists and Keys in ReactJs
-### Componentization
-### Properties
+- State immutability
+- Lists and Keys in ReactJs
+- Componentization
+- Properties
