@@ -85,10 +85,8 @@ export function RequestContextProvider({
   )
 
   useEffect(() => {
-    if (request) {
-      const requestJSON = JSON.stringify(request)
-      localStorage.setItem('@coffe-delivery: request.state-1.0.0', requestJSON)
-    }
+    const requestJSON = JSON.stringify(request)
+    localStorage.setItem('@coffe-delivery: request.state-1.0.0', requestJSON)
   }, [request, State])
 
   function handleAmount(amount: number, img: string) {
