@@ -78,6 +78,8 @@ export function RequestContextProvider({
 
       if (storedStateAsJSON) {
         return JSON.parse(storedStateAsJSON)
+      } else {
+        return []
       }
     },
   )
