@@ -36,39 +36,51 @@ export function RequestContextProvider({
   children,
 }: RequestContextProviderProps) {
   const [State, setState] = useState(false)
-  const [request, dispatch] = useReducer((state: Request[], action: any) => {
-    if (action.type === 'handleAmount') {
-      if (State === false) {
-        setState(true)
-      } else {
-        setState(false)
-      }
-      state.map((item) => {
-        if (item.img === action.payload.img) {
-          const State = item
-          State.amount = action.payload.amount
-          item = State
-          return item
+  const [request, dispatch] = useReducer(
+    (state: Request[], action: any) => {
+      if (action.type === 'handleAmount') {
+        if (State === false) {
+          setState(true)
         } else {
-          return item
+          setState(false)
         }
-      })
-    }
-    if (action.type === 'handleDelete') {
-      const requests = state.filter((item) => item.img !== action.payload.img)
-      return requests
-    }
+        state.map((item) => {
+          if (item.img === action.payload.img) {
+            const State = item
+            State.amount = action.payload.amount
+            item = State
+            return item
+          } else {
+            return item
+          }
+        })
+      }
+      if (action.type === 'handleDelete') {
+        const requests = state.filter((item) => item.img !== action.payload.img)
+        return requests
+      }
 
-    if (action.type === 'handleDeleteRequests') {
-      return []
-    }
+      if (action.type === 'handleDeleteRequests') {
+        return []
+      }
 
-    if (action.type === 'handleNewRequest') {
-      return [...state, action.payload.newCoffee]
-    }
+      if (action.type === 'handleNewRequest') {
+        return [...state, action.payload.newCoffee]
+      }
 
-    return state
-  }, [])
+      return state
+    },
+    [],
+    () => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffe-delivery: request.state-1.0.0',
+      )
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      }
+    },
+  )
 
   useEffect(() => {
     if (request) {
