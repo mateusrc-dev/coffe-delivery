@@ -70,7 +70,7 @@ export function RequestContextProvider({
 
       return state
     },
-    [],
+    [{ title: '', price: '', img: '', amount: '' }],
     () => {
       const storedStateAsJSON = localStorage.getItem(
         '@coffe-delivery: request.state-1.0.0',
