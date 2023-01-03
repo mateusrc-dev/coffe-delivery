@@ -81,8 +81,6 @@ export function RequestContextProvider({
     },
   )
 
-  console.log(request)
-
   useEffect(() => {
     const requestJSON = JSON.stringify(request)
     localStorage.setItem('@coffe-delivery: request.state-1.0.0', requestJSON)
