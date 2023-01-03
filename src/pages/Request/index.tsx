@@ -91,9 +91,9 @@ export function Request() {
     }
     setPriceFull(handleFullPrice())
     setFullPrice(handleFullPrice() + 3.5)
-  }, [request])
+  }, [state, request])
 
-  const { register, reset, handleSubmit, watch } = useForm<NewRequestFormData>({
+  const { register, reset, handleSubmit } = useForm<NewRequestFormData>({
     resolver: zodResolver(newRequestFormValidationSchema),
     defaultValues: {
       cep: '',
@@ -138,9 +138,6 @@ export function Request() {
   function handlePaymentCash() {
     setPayment('cash')
   }
-
-  const cep = watch('cep')
-  console.log(cep)
 
   return (
     <RequestContainer>

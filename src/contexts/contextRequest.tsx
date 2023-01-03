@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 
 interface Request {
   title: string
@@ -29,35 +35,58 @@ interface RequestContextProviderProps {
 export function RequestContextProvider({
   children,
 }: RequestContextProviderProps) {
-  // const [request, setRequest] = useState<Request[]>([])
-  const [request, dispatch] = useReducer((state: Request[], action: any) => {
-    if (action.type === 'handleAmount') {
-      state.map((item) => {
-        if (item.img === action.payload.img) {
-          const State = item
-          State.amount = action.payload.amount
-          item = State
-          return item
+  const [State, setState] = useState(false)
+  const [request, dispatch] = useReducer(
+    (state: Request[], action: any) => {
+      if (action.type === 'handleAmount') {
+        if (State === false) {
+          setState(true)
         } else {
-          return item
+          setState(false)
         }
-      })
-    }
-    if (action.type === 'handleDelete') {
-      const requests = state.filter((item) => item.img !== action.payload.img)
-      return requests
-    }
+        state.map((item) => {
+          if (item.img === action.payload.img) {
+            const State = item
+            State.amount = action.payload.amount
+            item = State
+            return item
+          } else {
+            return item
+          }
+        })
+      }
+      if (action.type === 'handleDelete') {
+        const requests = state.filter((item) => item.img !== action.payload.img)
+        return requests
+      }
 
-    if (action.type === 'handleDeleteRequests') {
-      return []
-    }
+      if (action.type === 'handleDeleteRequests') {
+        return []
+      }
 
-    if (action.type === 'handleNewRequest') {
-      return [...state, action.payload.newCoffee]
-    }
+      if (action.type === 'handleNewRequest') {
+        return [...state, action.payload.newCoffee]
+      }
 
-    return state
-  }, [])
+      return state
+    },
+    [],
+    () => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffe-delivery: request.state-1.0.0',
+      )
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      }
+    },
+  )
+
+  console.log(request)
+
+  useEffect(() => {
+    const requestJSON = JSON.stringify(request)
+    localStorage.setItem('@coffe-delivery: request.state-1.0.0', requestJSON)
+  }, [request, State])
 
   function handleAmount(amount: number, img: string) {
     dispatch({ type: 'handleAmount', payload: { amount, img } })
