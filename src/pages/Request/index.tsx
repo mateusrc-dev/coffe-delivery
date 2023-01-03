@@ -49,21 +49,29 @@ export function Request() {
   const [payment, setPayment] = useState('')
   const [priceFull, setPriceFull] = useState(0)
   const [fullPrice, setFullPrice] = useState(0)
+  const [state, setState] = useState(false)
   const { request, handleAmount, handleDelete, handleDeleteRequests } =
     useContext(RequestContext)
 
-  console.log(address)
-
   function handleAmountAdd(img: string, amount: number) {
     handleAmount(amount + 1, img)
+    if (state === false) {
+      setState(true)
+    } else {
+      setState(false)
+    }
   }
 
   function handleAmountSub(img: string, amount: number) {
-    console.log('chegamos aqui')
     if (amount === 1) {
       return amount
     } else {
       handleAmount(amount - 1, img)
+      if (state === false) {
+        setState(true)
+      } else {
+        setState(false)
+      }
     }
   }
 

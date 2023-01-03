@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 
 interface Request {
   title: string
@@ -29,29 +29,46 @@ interface RequestContextProviderProps {
 export function RequestContextProvider({
   children,
 }: RequestContextProviderProps) {
-  const [request, setRequest] = useState<Request[]>([])
-
-  console.log(request)
-
-  function handleAmount(amount: number, img: string) {
-    setRequest(
-      request.map((item) => {
-        if (item.img === img) {
-          return { ...item, amount }
+  // const [request, setRequest] = useState<Request[]>([])
+  const [request, dispatch] = useReducer((state: Request[], action: any) => {
+    if (action.type === 'handleAmount') {
+      state.map((item) => {
+        if (item.img === action.payload.img) {
+          const State = item
+          State.amount = action.payload.amount
+          item = State
+          return item
         } else {
           return item
         }
-      }),
-    )
+      })
+    }
+    if (action.type === 'handleDelete') {
+      const requests = state.filter((item) => item.img !== action.payload.img)
+      return requests
+    }
+
+    if (action.type === 'handleDeleteRequests') {
+      return []
+    }
+
+    if (action.type === 'handleNewRequest') {
+      return [...state, action.payload.newCoffee]
+    }
+
+    return state
+  }, [])
+
+  function handleAmount(amount: number, img: string) {
+    dispatch({ type: 'handleAmount', payload: { amount, img } })
   }
 
   function handleDelete(img: string) {
-    const requests = request.filter((item) => item.img !== img)
-    setRequest(requests)
+    dispatch({ type: 'handleDelete', payload: { img } })
   }
 
   function handleDeleteRequests() {
-    setRequest([])
+    dispatch({ type: 'handleDeleteRequests' })
   }
 
   function handleNewRequest(
@@ -66,7 +83,7 @@ export function RequestContextProvider({
       img,
       amount,
     }
-    setRequest((state) => [...state, newCoffee])
+    dispatch({ type: 'handleNewRequest', payload: { newCoffee } })
   }
   return (
     <RequestContext.Provider
