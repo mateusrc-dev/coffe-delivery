@@ -109,7 +109,6 @@ export function Request() {
 
   const inputValue = watch('complement')
   const inputValueExist = inputValue?.length !== 0 ? 'true' : 'false'
-  console.log(inputValueExist)
 
   function handleCreateNewCycle(data: NewRequestFormData) {
     if (payment.length === 0) {
