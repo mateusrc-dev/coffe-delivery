@@ -72,9 +72,9 @@ export const RequestContainer = styled.div`
       margin-right: 0.75rem;
       margin-bottom: 1rem;
     }
-    .complement {
+    /*.complement {
       width: 21.75rem;
-    }
+    }*/
     .district {
       width: 12.5rem;
       margin-right: 0.75rem;
@@ -438,6 +438,51 @@ export const RequestContainer = styled.div`
           color: ${(props) => props.theme['brown-100']};
         }
       }
+    }
+  }
+`
+
+interface InputProps {
+  inputValueExist: string | null
+}
+
+export const Input = styled.div<InputProps>`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border: 1px solid ${(props) => props.theme['gray-500']};
+  border-radius: 4px;
+  background: ${(props) => props.theme['gray-800']};
+  min-width: 21.75rem;
+  &:has(input:focus) {
+    outline: 0;
+    box-shadow: 0 0 0 1px ${(props) => props.theme['purple-200']};
+  }
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  color: ${(props) => props.theme['gray-700']};
+  font-style: italic;
+  span {
+    display: ${(props) => (props.inputValueExist === 'true' ? 'none' : 'flex')};
+  }
+  input {
+    background: transparent;
+    border: 0;
+    height: 0;
+    padding: 0.75rem 0;
+    width: 100%;
+    &::placeholder {
+      text-align: justify;
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.3;
+      color: ${(props) => props.theme['gray-700']};
+    }
+    &:focus {
+      box-shadow: none;
     }
   }
 `

@@ -14,8 +14,9 @@ import {
   MapPin,
   Timer,
   Warning,
+  // CodesandboxLogo,
 } from 'phosphor-react'
-import { RequestContainer } from './styles'
+import { Input, RequestContainer } from './styles'
 import Image from '../../assets/Illustration.svg'
 import { RequestContext } from '../../contexts/contextRequest'
 
@@ -93,7 +94,7 @@ export function Request() {
     setFullPrice(handleFullPrice() + 3.5)
   }, [state, request])
 
-  const { register, reset, handleSubmit } = useForm<NewRequestFormData>({
+  const { register, reset, handleSubmit, watch } = useForm<NewRequestFormData>({
     resolver: zodResolver(newRequestFormValidationSchema),
     defaultValues: {
       cep: '',
@@ -105,6 +106,10 @@ export function Request() {
       street: '',
     },
   })
+
+  const inputValue = watch('complement')
+  const inputValueExist = inputValue?.length !== 0 ? 'true' : 'false'
+  console.log(inputValueExist)
 
   function handleCreateNewCycle(data: NewRequestFormData) {
     if (payment.length === 0) {
@@ -172,12 +177,14 @@ export function Request() {
                   placeholder="Número"
                   {...register('number')}
                 />
-                <input
-                  className="complement"
-                  type="text"
-                  placeholder="Complemento                                                   Opcional"
-                  {...register('complement')}
-                />
+                <Input inputValueExist={inputValueExist}>
+                  <input
+                    type="text"
+                    placeholder="Complemento"
+                    {...register('complement')}
+                  />
+                  <span>Opcional</span>
+                </Input>
               </div>
               <div className="address">
                 <input
