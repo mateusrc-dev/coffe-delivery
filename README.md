@@ -8,3 +8,6 @@ In this project, technologies such as ReactJs, Context Api, useState, useReduce,
 - Lists and Keys in ReactJs
 - Componentization
 - Properties
+
+## ➡️ deploy of application:
+ https://coffedelivery.netlify.app/
